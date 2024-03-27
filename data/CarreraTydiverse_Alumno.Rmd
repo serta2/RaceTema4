@@ -288,6 +288,7 @@ top_counts_sorted <- cran %>% group_by(package) %>% summarise(count = n()) %>% a
 24. En lugar de utilizar el recuento de descargas, es más lógico considerar el número de ordenadores distintos en los que se han descargado las librerías, para ello utilizaríamos la columna `unique` que cuenta solo una descarga por ordenador, independientemente del número de veces que se descarge una librería. Repite los cálculos considerando esta variable y almacena el resultado en `top_unique_sorted`.
 
 ```{r}
+top_unique_sorted <- cran %>% group_by(package) %>% summarise(unique = n_distinct(ip_id)) %>% arrange(desc(unique)) %>% filter(row_number() <= quantile(unique, probs = 0.99)) %>% arrange(desc(unique))
 
 
 
