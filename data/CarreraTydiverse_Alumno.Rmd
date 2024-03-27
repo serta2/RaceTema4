@@ -414,6 +414,9 @@ str(students3_tidy)
 32. Considera que la columna `class` queremos especificarla con valores, 1,2,3,4 y 5 en lugar de class1, ..., class5. En librería de importación de datos (`readr`) se proporcionan funciones que permite identificar y extraer diversos tipos de datos. Son las funciones `parse_XXXX`. Observa el efecto de aplicar `parse_number('class5')` y utiliza el resultado para realizar la tarea solicitada.
 
 ```{r}
+students3_tidy <- students3 %>% gather(key = "exam", value = "score", -name, na.rm = TRUE) %>% separate(col = exam, into = c("class", "exam_type"), sep = "_") %>% mutate(class = parse_number(class)) %>% group_by(name, class, exam_type) %>% summarise(score = first(score)) %>% spread(key = exam_type, value = score)
+
+str(students3_tidy)
 
 
 
