@@ -426,7 +426,9 @@ str(students3_tidy)
 ```
 33. Observa el conjunto `students4` donde se presenta el problema de tener varias observaciones en la misma tabla. Separa el conjunto en dos tablas, una que contenga información relativa a los estudiantes, que llamarás `student_info`, que no debe contener repeticiones, y otra con las calificaciones y la clave primaria que enlaza ambas tablas(`id`), que llamarás `gradebook`.
 ```{r}
+student_info <- students4 %>% distinct(id, .keep_all = TRUE)
 
+gradebook <- students4 %>% select(id, starts_with("exam"))
 
 
 
